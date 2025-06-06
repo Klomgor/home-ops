@@ -21,18 +21,11 @@ spec:
       radarr:
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          nfs-probe:
-            image:
-              repository: public.ecr.aws/docker/library/busybox
-              tag: 1.37.0@sha256:f64ff79725d0070955b368a4ef8dc729bd8f3d8667823904adcb299fe58fc3da
-            args: ["/bin/sh", "-c", "while true; do nc -z expanse.internal 2049; sleep 10; done"]
-            restartPolicy: Always
         containers:
           app:
             image:
               repository: ghcr.io/home-operations/radarr
-              tag: 5.25.0.10024@sha256:512dee5af5226f4952413fac01d599e89a24107f21ae451ef44644c779bf4f7d
+              tag: 5.26.0.10051@sha256:9a9bbec11725e485a2cd0fb1bd199ec0c358aa7b09c81ae712c2cfb9d555fde5
             env:
               RADARR__APP__INSTANCENAME: Radarr
               RADARR__APP__THEME: dark
