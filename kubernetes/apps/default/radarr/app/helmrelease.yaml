@@ -21,18 +21,11 @@ spec:
       radarr:
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          nfs-probe:
-            image:
-              repository: public.ecr.aws/docker/library/busybox
-              tag: 1.37.0@sha256:f64ff79725d0070955b368a4ef8dc729bd8f3d8667823904adcb299fe58fc3da
-            args: ["/bin/sh", "-c", "while true; do nc -z expanse.internal 2049; sleep 10; done"]
-            restartPolicy: Always
         containers:
           app:
             image:
               repository: ghcr.io/home-operations/radarr
-              tag: 5.25.0.10024@sha256:512dee5af5226f4952413fac01d599e89a24107f21ae451ef44644c779bf4f7d
+              tag: 5.27.0.10101@sha256:f1a47717f5792d82becbe278c9502d756b898d63b2c637da131172c4adf1ffc7
             env:
               RADARR__APP__INSTANCENAME: Radarr
               RADARR__APP__THEME: dark
@@ -77,7 +70,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: radarr
         ports:
           http:
             port: *port
@@ -88,10 +80,6 @@ spec:
           - name: internal
             namespace: kube-system
             sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: *port
     persistence:
       config:
         existingClaim: radarr
