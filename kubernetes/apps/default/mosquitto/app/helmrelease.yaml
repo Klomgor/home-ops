@@ -23,7 +23,7 @@ spec:
           app:
             image:
               repository: public.ecr.aws/docker/library/eclipse-mosquitto
-              tag: 2.0.21
+              tag: 2.0.22
             env:
               TZ: America/New_York
             securityContext:
@@ -44,11 +44,10 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: mosquitto
         type: LoadBalancer
         annotations:
           external-dns.alpha.kubernetes.io/hostname: mosquitto.devbu.io
-          lbipam.cilium.io/ips: 192.168.42.129, ::ffff:192.168.42.129
+          lbipam.cilium.io/ips: 192.168.42.129
         ports:
           http:
             port: 1883
